@@ -1,6 +1,6 @@
 FROM openshift/base-centos7
 
-ADD . /opt/mongosync
+ADD ./output /opt/mongosync/output
 
 RUN yum install -y openssl
 
