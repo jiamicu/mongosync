@@ -1,13 +1,18 @@
 FROM openshift/base-centos7
 
-ADD ./output /opt/mongosync/output
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+ 
+#update application timezone
+RUN echo "Asia/Shanghai" >> /etc/timezone
 
+ADD ./output /opt/mongosync/output
+COPY ./output/sync.ini /etc/supervisord.d
 RUN yum install -y openssl
+RUN yum install -y epel-release
+RUN yum install -y supervisor
 
 RUN echo "/opt/mongosync/output" >> /etc/ld.so.conf
 
 RUN ldconfig
 
-ENTRYPOINT [ "/opt/mongosync/output/mongosync","-c" ]
-
-CMD [ "/opt/mongosync/output/mongosync.conf" ]
+ENTRYPOINT [ "/usr/bin/supervisord" ]
