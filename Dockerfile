@@ -15,4 +15,4 @@ RUN echo "/opt/mongosync/output" >> /etc/ld.so.conf
 
 RUN ldconfig
 
-ENTRYPOINT [ "/usr/bin/supervisord" ]
+ENTRYPOINT ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
