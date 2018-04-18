@@ -6,7 +6,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 RUN echo "Asia/Shanghai" >> /etc/timezone
 
 ADD ./output /opt/mongosync/output
-COPY ./output/sync.ini /etc/supervisord.d
+ADD ./output/sync.ini /etc/supervisord.d/
 RUN yum install -y openssl
 RUN yum install -y epel-release
 RUN yum install -y supervisor
