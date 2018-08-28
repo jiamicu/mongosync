@@ -9,9 +9,8 @@ ADD ./output /opt/mongosync/output
 
 RUN yum install -y openssl
 RUN yum install -y epel-release
-RUN yum install -y supervisor
-ADD ./output/sync.conf /etc/supervisord.d/
+RUN yum install -y vim
 RUN echo "/opt/mongosync/output" >> /etc/ld.so.conf
 RUN ldconfig
 
-CMD [ "/usr/bin/supervisord", "-c", "/etc/supervisord.d/sync.conf" ]
+CMD [ "/opt/mongosync/output/mongosync", "-c", "/opt/mongosync/output/mongosync.conf" ]
